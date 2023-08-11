@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador de tareas Pendientes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Administrador de tareas Pendientes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Tarea</th>
+                <th>Fecha de vencimiento</th>
+                <th>Completado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tarea 1</td>
+                <td>10/8/23</td>
+                <td><input type="checkbox" data-task="task1"></td>
+            </tr>
+            <tr>
+                <td>Tarea 2</td>
+                <td>10/8/23</td>
+                <td><input type="checkbox" data-task="task2"></td>
+            </tr>
+            <tr>
+                <!---->
+                <td>Tarea 3</td>
+                <td>11/8/23</td>
+                <td><input type="checkbox" data-task="task3"></td>
+            </tr>
+        </tbody>
+        
+    </table>
+
+    <script>
+        // Add event listener to checkboxes
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const taskKey = this.getAttribute('data-task');
+                localStorage.setItem(taskKey, this.checked);
+            });
+
+            // Set initial checked state from local storage
+            const taskKey = checkbox.getAttribute('data-task');
+            const isChecked = localStorage.getItem(taskKey) === 'true';
+            checkbox.checked = isChecked;
+        });
+    </script>
+</body>
+</html>
